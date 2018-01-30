@@ -1,0 +1,10 @@
+<!--components/popup/popup.wxml-->
+<view class="popup popup--{{popupType}} popup--{{isOpen ? 'show' : ''}}">
+  <!-- 遮罩层，有需要可以在遮罩层上增加点击事件 -->
+  <view class="popup__mask animated {{isOpen ? 'fadeIn' : 'fadeOut'}}" bindtap="fnMaskClick" bindtouchmove="fnMaskClick"></view>
+  <!-- 弹出层的内容放在此元素内 -->
+  <view class="popup__container">
+    <slot>123</slot>
+  </view>
+</view>
+

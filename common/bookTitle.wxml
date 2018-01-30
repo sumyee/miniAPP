@@ -1,0 +1,9 @@
+<template name="bookTitle">
+  <view class="book-title">
+    <view class="book-title-main">
+      <view class="book-title-main_block"></view>
+      <text class="book-title-main_text">{{main}}</text>
+    </view>
+    <view class="book-title-sub">{{sub}}</view>
+  </view>
+</template>

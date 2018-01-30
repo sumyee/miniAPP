@@ -1,0 +1,31 @@
+<!--components/steps/steps.wxml-->
+<!--  -->
+<wxs module="timeFormat" src="../../filter/timeFormat.wxs"></wxs>
+
+<view>
+  <block wx:for="{{steps}}" wx:key="index">
+    <view class="step">
+      <view class="step__icon">
+        <view class="step__dot {{index > current? 'step__dot--todo' : ''}}"></view>
+        <view wx:if="{{index !== steps.length-1}}" class="step__line {{index < current? 'step__line--finish' : ''}} "></view>
+      </view>
+      <view class="step__content">
+        <view wx:if="{{item.desc}}" class="step__desc {{index > current? 'step__desc--todo' : ''}}">
+          <view class="step__desc-con">{{item.title}}</view>
+          <view class="step__desc-time">{{timeFormat.getTime(item.time, 'MM-DD HH:ii')}}</view>
+        </view>
+        <view wx:if="{{item.desc}}" class="step__title">{{item.desc}}</view>
+        <!--  -->
+        <view wx:if="{{item.adviser}}" class="step__desc {{index > current? 'step__desc--todo' : ''}}">
+          <view class="step__desc-con">您选择了 <text class="nick_name_text">{{item.adviser.nick_name}}</text> 驻场夜店顾问</view>
+          <view class="step__desc-time">{{timeFormat.getTime(item.time, 'MM-DD HH:ii')}}</view>
+        </view>
+        <!--  -->
+        <view wx:if="{{item.partner}}" class="step__desc {{index > current? 'step__desc--todo' : ''}}">
+        <view class="step__desc-con">您选择了 <text class="nick_name_text">{{item.partner.nick_name}}</text> 驻场小蜜蜂</view>
+        <view class="step__desc-time">{{timeFormat.getTime(item.time, 'MM-DD HH:ii')}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

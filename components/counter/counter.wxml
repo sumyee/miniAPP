@@ -1,0 +1,12 @@
+<!--components/counter/counter.wxml-->
+<view class="counter">
+  <view class="counter__number">
+    <view class="counter__modify counter_minus counter__opt{{number <= minNum || disabled ? ' counter__no' : ' show'}}" bindtap="minusHandler">
+      <text>-</text>
+    </view>
+    <text wx:if="{{number}}" class="counter__modify counter__text{{disabled ? ' counter__no' : ''}}">{{number}}</text>
+    <view class="counter__modify counter_add counter__opt{{number >= maxNum || disabled ? ' counter__no' : ''}}" bindtap="addHandler">
+      +
+    </view>
+  </view>
+</view>

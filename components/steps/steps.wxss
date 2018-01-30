@@ -1,0 +1,78 @@
+/* components/steps/steps.wxss */
+
+.step {
+  display: flex;
+}
+
+.step__icon {
+  color: #fcb903;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50rpx;
+}
+
+.step__dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #fcb903;
+  border: 1px solid #fcb903;
+}
+
+.step__dot--todo {
+  border-color: #ddd;
+}
+
+.step__line {
+  flex: 1;
+  width: 1rpx;
+  height: 100%;
+  background: #ddd;
+}
+
+.step__line--finish {
+  background: #fcb903;
+}
+
+.step__content {
+  width: 100%;
+  margin-top: -10rpx;
+  margin-bottom: 80rpx;
+}
+
+.step__desc {
+  display: flex;
+  line-height: 38rpx;
+  font-size: 30rpx;
+  color: #0d0d0d;
+  padding-right: 1rpx;
+  margin-bottom: 10rpx;
+}
+
+.step__desc-con {
+  flex: 1;
+}
+
+.step__desc-time {
+  width: 180rpx;
+  margin-left: 30rpx;
+  font-size: 28rpx;
+  color: #a4a4a4;
+  text-align: right;
+  word-break: break-all;
+}
+
+.step__desc--todo {
+  color: #999;
+}
+
+.step__title {
+  font-size: 28rpx;
+  color: #a4a4a4;
+  line-height: 28rpx;
+}
+
+.nick_name_text {
+  color: #fcb903;
+}

@@ -1,0 +1,5 @@
+<!--pages/postComment/postComment.wxml-->
+<view class="postComment">
+  <textarea class="comment-textarea" maxlength="250" placeholder='这一刻的想法...' bindinput="commentInput"></textarea>
+</view>
+<view class="post-comment-btn" bindtap="postComment">发表评论</view>

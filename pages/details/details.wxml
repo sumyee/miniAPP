@@ -1,0 +1,138 @@
+<!--pages/details/details.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/bilingualTitle.wxml" />
+<import src="../../common/cell.wxml" />
+<import src="../../common/commentItem.wxml" />
+<import src="../../common/bookTitle.wxml" />
+
+<view class="details-con">
+  <view class="details-box">
+    <view style="background-image:url({{data.station.background_image}})" class="cover-image" data-current="{{data.station.background_image}}" data-urls="{{[]}}" bindtap="previewImage"></view>
+    <!-- 夜店名称  -->
+    <view class="nightclub-info">
+      <view class="business-hours">
+        <text>营业时间：</text>
+        <text>{{data.station.open_time}}-{{data.station.close_time}}</text>
+      </view>
+      <view class="nightclub-name-con">
+        <view class="nightclub-name">{{data.station.name}}</view>
+        <image wx:if="{{data.station.islike}}" class="nightclub-like" src="../../images/content_icon_like_sel@3x.png" data-id="{{data.station.id}}" bindtap="cancelLikeTap"></image>
+        <image wx:else class="nightclub-like" src="../../images/content_icon_like@3x.png" data-id="{{data.station.id}}" bindtap="likeTap"></image>
+      </view>
+      <view class="nightclub-type">{{data.station.type}}</view>
+    </view>
+    <!--  icon -->
+    <view class="nightclub-features">
+      <view class="nightclub-features-item">
+        <image class="nightclub-features-image" src="../../images/list_icon_recommend{{data.station.is_commend ? '_active' : ''}}@3x.png"></image>
+        <text class="nightclub-features-text">推荐</text>
+      </view>
+      <view class="nightclub-features-item">
+        <image class="nightclub-features-image" src="../../images/list_icon_parking{{data.station.is_park ? '_active' : ''}}@3x.png"></image>
+        <text class="nightclub-features-text">泊车</text>
+      </view>
+      <view class="nightclub-features-item">
+        <image class="nightclub-features-image" src="../../images/list_icon_baping{{data.station.is_screen ? '_active' : ''}}@3x.png"></image>
+        <text class="nightclub-features-text">霸屏</text>
+      </view>
+      <view class="nightclub-features-item">
+        <image class="nightclub-features-image" src="../../images/list_icon_wifi{{data.station.is_wifi ? '_active' : ''}}@3x.png"></image>
+        <text class="nightclub-features-text">无线</text>
+      </view>
+      <view class="nightclub-features-item" bindtap="gotoConsultant">
+        <image class="nightclub-features-image" src="../../images/list_icon_consultant{{data.station.is_adviser ? '_active' : ''}}@3x.png"></image>
+        <text class="nightclub-features-text">顾问</text>
+      </view>
+    </view>
+    <!-- 地址 电话  -->
+    <view class="cell-con" data-latitude="{{data.station.lat}}" data-longitude="{{data.station.lng}}" data-name="{{data.station.name}}" data-address="{{data.station.address}}" bindtap='showMap'>
+      <template is="cell" bindtap="cell" data="{{text: data.station.address, desc: '', ft: '', icon: '../../images/content_icon_address@3x.png', link: true}}"></template>
+    </view>
+    <view class="cell-con" data-phone="{{data.station.phone}}" bindtap="phoneCall">
+      <template is="cell" data="{{text: data.station.phone, icon: '../../images/content_icon_tel@3x.png', link: true}}"></template>
+    </view>
+  </view>
+  <!-- 用户评论  -->
+  <view class="comment">
+    <template is="bilingualTitle" data="{{mainTitle: '用户评论', subTitle: 'COMMENT'}}" />
+    <view wx:if="{{data.feed_list.length}}">
+      <template is="commentItem" data="{{data: data.feed_list[0]}}"></template>
+      <view bindtap="gotoComments" data-data="{{data.station.id}}">
+        <template is="cell" data="{{text: '全部评论' + ' ( ' + data.feed_count + ' )', noborder: true, link: true}}"></template>
+      </view>
+    </view>
+    <view wx:else class='no-data'>暂无评论</view>
+  </view>
+  <!-- 商家介绍  -->
+  <view class="introduction">
+    <template is="bilingualTitle" data="{{mainTitle: '商家介绍', subTitle: 'INTRODUCTION'}}" />
+    <view class="club-logo">
+      <image src="{{data.station.logo_url}}"></image>
+    </view>
+    <view class="club-name">{{data.station.name}}</view>
+    <view class="club-info">{{data.station.introduction_text}}</view>
+    <block wx:if="{{data.station.introduction_img.length}}" wx:for="{{data.station.introduction_img}}" wx:key="item">
+      <view class="club-image" style="background-image:url({{item}})" data-current="{{item}}" data-urls="{{[]}}" bindtap="previewImage">
+      </view>
+    </block>
+
+  </view>
+  <!-- 底部菜单  -->
+  <view class="bottom-bar">
+    <view wx:if="{{is_reserve}}" class="book-btn" bindtap='showReserve'>订台进度</view>
+    <view wx:else class="book-btn" bindtap='showPopup'>预约订台</view>
+    <view class="menu-btn">
+      <text class="menu-btn-text" bindtap="goToMenu">查看夜店酒水菜单</text>
+      <view class="icon"></view>
+    </view>
+  </view>
+</view>
+
+<!-- popup  -->
+<ns-popup class="ns_popup" popup-type="bottom" is-open="{{openPopup}}">
+  <!-- <view></view> -->
+  <scroll-view style="width: 100vw;max-height: 70vh;padding-bottom: 150rpx;" scroll-y="true">
+    <!-- 选择订台日期  -->
+    <template is="bookTitle" data="{{main: '订台日期', sub: '选择订台日期'}}"></template>
+    <view class="select-box">
+      <block wx:for="{{dateArr}}" wx:key="{{item}}">
+        <view bindtap="selectDateFn" data-ymd="{{item.YMD}}" data-date="{{item.date}}" class="select-item {{selectDate === item.date ? 'select' : ''}}">{{item.date}}</view>
+      </block>
+    </view>
+    <!-- 选择订台时间  -->
+    <template is="bookTitle" data="{{main: '到场时间', sub: '选择您的到场时间'}}"></template>
+    <view class="select-box">
+      <block wx:if="{{data.config.arrive_time_list.length}}" wx:for="{{data.config.arrive_time_list}}" wx:key="{{item}}">
+        <view bindtap="selectTimeFn" data-time="{{item}}" class="select-item {{selectTime === item && selectTimeType != '其他' ? 'select' : ''}}">{{item}}</view>
+      </block>
+
+      <view bindtap="selectTimeFn" data-time="其他" class="select-item {{selectTime=== '其他' || selectTimeType === '其他' ? 'select' : ''}}">
+        <picker mode="time" value="{{pickerTime}}" start="{{data.config.arrive_begin_time}}" end="{{data.config.arrive_end_time}}" bindchange="bindSelectTimeChange">{{time}}
+        </picker>
+      </view>
+
+    </view>
+    <!-- 选择到场人数  -->
+    <template is="bookTitle" data="{{main: '到场人数', sub: '选择与您一同到场的人数'}}"></template>
+    <view class="select-box">
+      <view bindtap="selectNumFn" data-num="1~3" class="select-item {{selectNum === '1~3' && selectNumType != '其他' ? 'select' : ''}}">1~3</view>
+      <view bindtap="selectNumFn" data-num="4~6" class="select-item {{selectNum === '4~6' && selectNumType != '其他' ? 'select' : ''}}">4~6</view>
+      <view bindtap="selectNumFn" data-num="7~9" class="select-item {{selectNum === '7~9' && selectNumType != '其他' ? 'select' : ''}}">7~9</view>
+
+      <view bindtap="selectNumFn" data-num="其他" class="select-item {{selectNum === '其他' || selectNumType === '其他' ? 'select' : ''}}">
+        <picker mode="multiSelector" bindchange="bindSelectNumChange" bindcolumnchange="bindSelectNumColumnChange" value="{{pickerNum}}" range="{{numArray}}">
+          {{num}}
+        </picker>
+      </view>
+
+
+    </view>
+    <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+        当前选择：{{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker> -->
+    <!--  确定订台按钮  -->
+    <view class="comfirmBtn" bindtap="comfirmBtn">确定</view>
+  </scroll-view>
+</ns-popup>

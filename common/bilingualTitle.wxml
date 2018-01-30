@@ -1,0 +1,10 @@
+<template name="bilingualTitle">
+  <view class="bilingual-title">
+    <view class="bilingual-title-con">
+      <view class="bilingual-title-main">{{mainTitle}}</view>
+      <view class="bilingual-title-sub">{{subTitle}}</view>
+      <view class="bilingual-title_line line1"></view>
+      <view class="bilingual-title_line line2"></view>
+    </view>
+  </view>
+</template>

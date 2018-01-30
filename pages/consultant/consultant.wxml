@@ -1,0 +1,28 @@
+<!--pages/consultant/consultant.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/consultantItem.wxml" />
+<import src="../../common/noData.wxml" />
+
+<view class="consultant">
+  <text class="main-title">夜店驻场顾问</text>
+  <text class="sub-title">顾问就是您的夜店小管家，可以全程为您进行服务</text>
+  <view class="consultantItem-con">
+    <block wx:if="{{advisers.length}}">
+      <block wx:for="{{advisers}}" wx:key="{{item}}">
+        <template is="consultantItem" data="{{id: item.id, avatar: item.avatar, gender: item.gender,  name: item.nick_name, age: item.age, select: canSelect}}"></template>
+      </block>
+    </block>
+    <block wx:else>
+      <template is="noData" data="{{text: '暂时没有夜店顾问'}}" />
+    </block>
+  </view>
+</view>
+
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载更多数据</view>
+  </view>
+  <view wx:if="{{loadedAll}}" class="weui-loadmore weui-loadmore_line">
+    <view class="weui-loadmore__tips">全部数据加载完毕</view>
+  </view>

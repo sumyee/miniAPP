@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/city/city",
+    "pages/account/account",
+    "pages/logs/logs",
+    "pages/search/search",
+    "pages/details/details",
+    "pages/comments/comments",
+    "pages/order/order",
+    "pages/purchase/purchase",
+    "pages/menu/menu",
+    "pages/bookReservation/bookReservation",
+    "pages/consultant/consultant",
+    "pages/orderDetails/orderDetails",
+    "pages/orderPay/orderPay",
+    "pages/productDetails/productDetails",
+    "pages/searchResult/searchResult",
+    "pages/postComment/postComment"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f9f9f9",
+    "navigationBarTitleText": "夜站",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#a4a4a4",
+    "selectedColor": "#fc9003",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "附近夜店",
+        "iconPath": "images/tab_icon_nightclub@3x.png",
+        "selectedIconPath": "images/tab_icon_nightclub_sel@3x.png"
+      },
+      {
+        "pagePath": "pages/account/account",
+        "text": "个人中心",
+        "iconPath": "images/tab_icon_user@3x.png",
+        "selectedIconPath": "images/tab_icon_user-sel@3x.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000
+  }
+}

@@ -1,0 +1,31 @@
+<!--pages/searchResult/searchResult.wxml-->
+<!-- 导入列表组件 -->
+<import src="../../common/listItem.wxml" />
+<import src="../../common/noData.wxml" />
+
+<!--  搜索结果  -->
+<view class="search-result">
+  <!-- 夜店列表  -->
+  <view class="listItem-container">
+    <!--  -->
+    <view wx:if="{{stations.length}}">
+      <block wx:for="{{stations}}" wx:for-item="item" wx:for-index="idx" data-data="{{item}}" wx:key="idx">
+        <navigator class="listItem-con" url="../details/details?id={{item.id}}">
+          <template is="listItem" data="{{data: item}}" />
+        </navigator>
+      </block>
+    </view>
+    <!--   -->
+    <view wx:else>
+      <template is="noData" data="{{text: '没有发现您搜索的酒吧'}}" />
+    </view>
+  </view>
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载更多数据</view>
+  </view>
+  <view wx:if="{{loadedAll}}" class="weui-loadmore weui-loadmore_line">
+    <view class="weui-loadmore__tips">全部数据加载完毕</view>
+  </view>
+</view>

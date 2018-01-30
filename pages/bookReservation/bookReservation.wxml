@@ -1,0 +1,41 @@
+<!--pages/bookReservation/bookReservation.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/stationTitle.wxml" />
+<import src="../../common/cell.wxml" />
+
+<view>
+  <!-- 标题 -->
+  <template is="stationTitle" data="{{name: data.station.name,open_time: data.station.open_time,close_time: data.station.close_time, desc: '预约订台'}}"></template>
+  <!-- 预约信息 -->
+  <view class="book-info">
+    <view class="book-info_item">
+      <view class="book-info_item_mian">订台日期</view>
+      <view class="book-info_item_sub">{{data.date}}</view>
+    </view>
+    <view class="book-info_item">
+      <view class="book-info_item_mian">到场时间</view>
+      <view class="book-info_item_sub">{{data.time}}</view>
+    </view>
+    <view class="book-info_item">
+      <view class="book-info_item_mian">到场人数</view>
+      <view class="book-info_item_sub">{{data.num}}</view>
+    </view>
+  </view>
+  <!-- 顾问 -->
+  <navigator url="../consultant/consultant?id={{data.station.id}}&canSelect=true" style='margin-top: 20rpx;'>
+    <template is="cell" data="{{text: '夜店顾问（可选）', ft: consultant, noborder: true, link: true}}"></template>
+  </navigator>
+
+  <!-- 备注 联系电话 -->
+  <view class="remark-con">
+  <view class="phone">
+    <text class="phone-text">联系手机号（必填）</text>
+    <input class="phone-input" type='number' placeholder="请输入联系手机号" bindinput="phoneInput"></input>
+  </view>
+    <textarea class="remark" maxlength="50" placeholder='可备注您希望预约的卡座号或其他信息(可选)' bindinput="remarkInput"></textarea>
+  </view>
+
+
+  <!--  提交  -->
+  <view class="comfirm-btn" bindtap="comfirmBook">提交预约</view>
+</view>

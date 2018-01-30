@@ -1,0 +1,32 @@
+<scroll-view scroll-y style="height: {{windowHeight}}" scroll-into-view="{{alpha}}">
+<view class="alphabet">
+  <!-- <view id="Top" class="header">
+    <view class="h-city">
+      <text>定位城市</text>
+    </view>
+  </view>
+  <view class="now-city">
+    <text class="now-city-name" data-data="深圳" bindtap="onTap">深圳</text>
+  </view> -->
+  <view class="alphabet-list">
+     <view wx:for="{{cities}}" wx:key="unique" id="{{item.alphabet}}" class="section-item">
+       <view class="section-item-header">
+         {{item.alphabet}}
+       </view>
+       <view wx:for="{{item.datas}}" wx:key="unique" wx:for-item="cell" wx:for-index="cellIndex" class="section-item-cells">
+         <view class="section-item-cell {{cellIndex != (item.datas.length-1) ? 'border-bottom':''}}" data-data="{{cell.name}}" data-id="{{cell.code}}" bindtap="onTap">
+           <text>{{cell.name}}</text>
+         </view>
+       </view>
+     </view>
+  </view>
+</view>
+</scroll-view>
+<!-- <view data-id="selector" catchtouchstart="handlerAlphaTap" bindtouchmove="handlerMove" class="alphanet-selector">
+ <view data-ap="Top" class="selector-one">
+    定位
+  </view> 
+  <view wx:for="{{cities}}" data-ap="{{item.alphabet}}" wx:key="unique" class="selector-one">
+    {{item.alphabet}}
+  </view>
+</view> -->

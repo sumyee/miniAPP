@@ -1,0 +1,24 @@
+/* pages/consultant/consultant.wxss */
+
+page {
+  background: #342e7b;
+  /* background-image: url('../../images/ba@3x.png') */
+}
+.consultant {
+  padding: 30rpx 24rpx 0;
+}
+
+.main-title {
+  display: block;
+  font-size: 40rpx;
+  color: #fff;
+}
+
+.sub-title {
+  opacity: 0.3;
+  font-size: 28rpx;
+  color: #fff;
+}
+.consultantItem-con {
+  margin-top: 50rpx;
+}

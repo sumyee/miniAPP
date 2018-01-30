@@ -1,0 +1,16 @@
+<!--pages/productDetails/productDetails.wxml-->
+
+<view wx:if="{{details}}" class="product-details">
+  <image class="product-details_image" lazy-load made="aspectFill" src="{{details.image_url}}"></image>
+  <view class="product-details_con">
+    <view class="product-details_name">{{details.name}}</view>
+    <view class="product-details_desc">{{details.desc}}</view>
+    <view class="product-details_price-con">
+      <view class="product-details_price">￥{{details.price}}</view>
+      <view class="product-details_count">
+         <counter number="{{count}}" maxNum="{{details.stock}}" data-data="{{details}}" bind:changenumber="onChangeNumber"></counter> 
+      </view>
+    </view>
+  </view>
+
+</view>

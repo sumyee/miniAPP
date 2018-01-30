@@ -1,0 +1,12 @@
+<template name="orderProItem">
+  <view class="orderProItem">
+    <image mode="aspectFill" class="orderProItem_img" src="{{image}}"></image>
+    <view class="orderProItem_desc">
+      <view class="orderProItem_desc_name">{{name}}</view>
+      <view class="orderProItem_desc_info">
+        <view class="orderProItem_desc_info_count">× {{count}}</view>
+        <view class="orderProItem_desc_info_price {{red ? 'red' : ''}}">￥ {{price}}</view>
+      </view>
+    </view>
+  </view>
+</template>

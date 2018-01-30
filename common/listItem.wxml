@@ -1,0 +1,27 @@
+<template name="listItem">
+  <view class="list-item">
+    <!-- <view class="list-item_img" style="background-image:url('http://qcloud.dpfile.com/pc/GPxHLKraAC9HX8JQ49JcZb1jpqftn21pzul2JfpvKZbYCMX9GcqM8WqJs9_-0BbpTYGVDmosZWTLal1WbWRW3A.jpg')"> -->
+    <view class="list-item_img" style="background-image:url({{data.logo_url}})">
+    </view>
+    <view class="list-item_info">
+      <view class="list-item_info_title">
+      <view class="list-item_info_title-name">{{data.name}}</view>
+      <view class="list-item_info_title-tag" wx:if="{{data.is_commend}}">
+        <ns-label type="fill">推荐夜店</ns-label>
+      </view>
+      </view>
+      <view class="list-item_info_address">{{data.address}}</view>
+      <view class="list-item_info_desc">
+        <view class="list-item_info_desc_info">
+        <view>
+        <image class="list-item_info_desc_info_icon" src="../../images/content_icon_like@3x.png"></image>
+        <text class="list-item_info_desc_info_text">{{data.real_like_number}}</text>
+        <image class="list-item_info_desc_info_icon" src="../../images/content_icon_message@3x.png"></image>
+        <text class="list-item_info_desc_info_text">{{data.comment_number}}</text>
+        </view>
+        </view>
+        <view class="list-item_info_desc_distance">{{data.distance}}</view>
+      </view>
+    </view>
+  </view>
+</template>

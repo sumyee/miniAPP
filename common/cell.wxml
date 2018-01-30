@@ -1,0 +1,10 @@
+<template name="cell">
+  <view class="cell cell--{{link ? 'access' : ''}} {{noborder ? 'no-border' : ''}}">
+    <image wx:if="{{icon}}" class="cell__icon icon" src="{{icon}}"></image>
+    <view class="cell__bd">
+      <view class="cell__text">{{text}}</view>
+      <view class="cell__desc">{{desc}}</view>
+    </view>
+    <view class="cell__ft">{{ft}}<text style='font-size: 0;width:1rpx;'>0</text></view>
+  </view>
+</template>

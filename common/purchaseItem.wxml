@@ -1,0 +1,45 @@
+<wxs module="timeFormat" src="../filter/timeFormat.wxs"></wxs>
+
+<template name="purchaseItem">
+  <view class="purchase-item" data-reserveid="{{reserve.id}}" data-status="{{reserve.status}}" data-station="{{station}}" bindtap="purchaseTap">
+     <view wx:if="{{reserve.status === 'FAIL'}}" class="mask"></view> 
+     <view wx:if="{{reserve.status === 'END'}}" class="mask"></view> 
+     <view wx:if="{{reserve.status === 'CANCEL'}}" class="mask"></view> 
+    <view class="purchase-item_img" style="background-image:url('{{station.logo_url}}')">
+    </view>
+    <view class="purchase-item_info">
+      <view class="purchase-item_info_title">
+        <view class="purchase-item_info_title-name">{{station.name}}</view>
+        <view class="purchase-item_info_title-tag">
+          <text>{{timeFormat.getTime(reserve.arrive_time, 'MM-DD')}}</text>
+        </view>
+      </view>
+      <view class="purchase-item_info_address">{{station.address}}</view>
+      <view class="purchase-item_info_desc">
+        <view class="purchase-item_info_desc_item">
+          <text class="purchase-item_info_desc_item_main">{{timeFormat.getTime(reserve.arrive_time, 'HH:ii')}}</text>
+          <text class="purchase-item_info_desc_item_sub">预约时间</text>
+          <view class="purchase-item_line"></view>
+        </view>
+        <view class="purchase-item_info_desc_item">
+          <text class="purchase-item_info_desc_item_main">{{reserve.people_number}}</text>
+          <text class="purchase-item_info_desc_item_sub">预约人数</text>
+          <view class="purchase-item_line"></view>
+        </view>
+        <view class="purchase-item_info_desc_item">
+          <text class="purchase-item_info_desc_item_main">{{reserve.table_no ? reserve.table_no : '-'}}</text>
+          <text class="purchase-item_info_desc_item_sub">台号</text>
+          <view class="purchase-item_line"></view>
+        </view>
+        <view class="purchase-item_info_desc_item">
+          <text wx:if="{{reserve.status === 'SUCCESS'}}" class="purchase-item_info_desc_item_main" class="purchasing">消费中</text>
+          <text wx:elif="{{reserve.status === 'FAIL'}}" class="purchase-item_info_desc_item_main">预约失败</text>
+          <text wx:elif="{{reserve.status === 'PENDING'}}" class="purchase-item_info_desc_item_main">订台中</text>
+          <text wx:elif="{{reserve.status === 'END'}}" class="purchase-item_info_desc_item_main">已过期</text>
+          <text wx:elif="{{reserve.status === 'CANCEL'}}" class="purchase-item_info_desc_item_main">已取消</text>
+          <text class="purchase-item_info_desc_item_sub">状态</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "夜店详情",
+  "usingComponents": {
+    "ns-popup": "../../components/popup/popup"
+  }
+}

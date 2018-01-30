@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "夜站",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "ns-label": "../../components/label/label",
+    "ns-popup": "../../components/popup/popup"
+  }
+}

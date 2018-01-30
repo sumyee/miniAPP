@@ -1,0 +1,17 @@
+<!--pages/comments/comments.wxml-->
+<import src="../../common/commentItem.wxml" />
+
+<view>
+  <block wx:for="{{comments}}" wx:key="item">
+    <template is="commentItem" data="{{data: item}}"></template>
+  </block>
+</view>
+
+  <!-- 加载更多 -->
+  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载更多数据</view>
+  </view>
+  <view wx:if="{{loadedAll}}" class="weui-loadmore weui-loadmore_line">
+    <view class="weui-loadmore__tips">全部数据加载完毕</view>
+  </view>

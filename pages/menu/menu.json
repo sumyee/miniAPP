@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "夜店",
+  "usingComponents": {
+    "ns-popup": "../../components/popup/popup",
+    "steps": "../../components/steps/steps",
+    "counter": "../../components/counter/counter"
+  }
+}

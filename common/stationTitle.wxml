@@ -1,0 +1,13 @@
+<template name="stationTitle">
+  <view class="station-title">
+    <view class="station-title-left">
+      <view class="station-title_title">{{name}}</view>
+      <view class="station-title_time">营业时间: {{open_time}}-{{close_time}}</view>
+    </view>
+    <view class="station-title-right">
+      <view class="station-title_desc">
+        <text class="station-title_desc_text">{{desc}}</text>
+      </view>
+    </view>
+  </view>
+</template>

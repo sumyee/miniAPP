@@ -1,0 +1,128 @@
+<!--pages/menu/menu.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/stationTitle.wxml" />
+<import src="../../common/noData.wxml" />
+<!--  -->
+<wxs module="checkProCount" src="../../filter/checkProCount.wxs"></wxs>
+
+<view class="container">
+  <!--  -->
+  <view id="header" class="header">
+    <!-- 标题 -->
+    <template is="stationTitle" data="{{name: stationData.name, open_time: stationData.open_time, close_time: stationData.close_time, desc: '在场消费'}}"></template>
+    <!-- tab  -->
+    <view class="menu-tab">
+      <view class="menu-tab_schedule-con" bindtap="changeTabOne">
+        <text class="menu-tab_text {{tab === 0 ? 'active' : ''}}"><text class="line"> </text>订台进度</text>
+      </view>
+      <view class="menu-tab_menu-con" bindtap="changeTabTwo">
+        <text class="menu-tab_text {{tab === 1 ? 'active' : ''}}"><text class="line"></text>夜店酒水</text>
+      </view>
+    </view>
+  </view>
+  <!-- 进度  -->
+  <view hidden="{{tab === 1}}" class="schedule-con">
+    <scroll-view scroll-y>
+      <view class="schedule-con_scroll">
+        <steps wx:if="{{schedule.length}}" steps="{{schedule}}" current="{{schedule.length}}"></steps>
+        <view wx:else>
+          <template is="noData" data="{{text: '暂无进度'}}" />
+        </view>
+      </view>
+    </scroll-view>
+    <!--  取消订台  -->
+    <view wx:if="{{schedule.length}}" class="book-cancel-con">
+      <view class="book-cancel-title">
+        <view class="book-cancel-title_mian">正在为您进行订台</view>
+        <view class="book-cancel-title_sub">未完成订台期间您可以取消或重新订台</view>
+      </view>
+      <view class="book-cancel-btn" bindtap="cancelBook">取消订台</view>
+    </view>
+  </view>
+  <!--  菜单  -->
+  <view hidden="{{tab === 0}}" class="menu-con">
+    <!--pages/others/menu/menu.wxml-->
+    <view class="detail">
+      <view class="content">
+        <view class="menu-container">
+          <scroll-view scroll-y="true" class="scroll-view" scroll-into-view="head-{{indexSize}}">
+            <view class="scroll-view-ul">
+
+              <block wx:for="{{proData}}" wx:for-item="item" wx:key="index" id="head-{{index}}">
+                <view class="scroll-view-item {{indexSize === index?'active':''}}" bindtap="scrollTo" data-index="{{index}}">
+                  {{item.category}}
+                </view>
+              </block>
+            </view>
+          </scroll-view>
+        </view>
+
+        <swiper indicator-dots='true' class="detail-container" bindchange="change" data-index="{{index}}" current="{{indexSize}}" vertical="true" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" duration="{{duration}}">
+          <swiper-item wx:for="{{proData}}" wx:for-item="item" wx:key="index">
+            <scroll-view scroll-y="true" class=" market-scroll-list">
+
+              <view class="title">{{proData[indexSize].category}} </view>
+
+              <block wx:for="{{proData[indexSize].goods}}" wx:key="index" wx:key="index" item="item" key="key">
+                <view class="inner">
+                  <!--  -->
+                  <view class="inner-pro-con" data-data="{{item}}" bindtap="showProDetails">
+                    <view class="cover">
+                      <view class="cover-img" style="background-image: url('{{item.image_url}}')"></view>
+                    </view>
+                    <view class="info">
+                      <view class="info-title overflow-2">{{item.name}}</view>
+                      <view class="info-subtitle overflow-3">{{item.desc}}</view>
+                      <!-- <view class="info-desc overflow">{{item.title}}</view> -->
+                    </view>
+                  </view>
+                  <!--  -->
+                  <view class="inner-pro-price">
+                    <view class="inner-pro-price_price">￥{{item.price}}</view>
+                    <view class="inner-pro-price_count">
+                      <counter number="{{checkProCount.getCount(carts, item)}}" maxNum="{{item.stock}}" data-data="{{item}}" bind:changenumber="onChangeNumber"></counter>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </scroll-view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
+    <!--  底部 bar -->
+    <view class="bottom-cart-bar">
+      <view class="bottom-cart-bar_price">
+        <view class="bottom-cart-bar_price_icon" bindtap="showPopup">
+          <image class="bottom-cart-bar_price_icon_img" src='../../images/content_icon_shopping.png'></image>
+        </view>
+        <view wx:if="{{totalNum}}" class="bottom-cart-bar_price_count">{{totalNum}}</view>
+        <view class="bottom-cart-bar_price_text">￥{{totalPrice}}</view>
+      </view>
+      <view class="bottom-cart-bar_btn" bindtap="gotoPay">去结算</view>
+    </view>
+  </view>
+</view>
+
+<!-- popup  -->
+<ns-popup class="ns_popup" popup-type="bottom" is-open="{{openPopup}}">
+  <!-- <view></view> -->
+  <view class="book-title cart-title">
+    <view class="book-title-main">
+      <view class="book-title-main_block"></view>
+      <text class="book-title-main_text">酒水购物车</text>
+    </view>
+    <view class="book-title-sub" bindtap="clearCartAll">清空</view>
+  </view>
+  <scroll-view class="cart-srcoll" scroll-y="{{true}}">
+    <block wx:for="{{popupCarts}}" wx:key="{{item}}">
+      <view class="cart-pro-item overflow">
+        <view class="cart-pro-item_name overflow">{{item.name}}</view>
+        <view class="cart-pro-item_price overflow">￥{{item.price}}</view>
+        <view class="cart-pro-item_count">
+          <counter number="{{item.count}}" maxNum="{{item.stock}}" data-data="{{item}}" bind:changenumber="onChangeNumber"></counter>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</ns-popup>

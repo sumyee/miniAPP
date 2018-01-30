@@ -1,0 +1,34 @@
+<!--pages/orderPay/orderPay.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/stationTitle.wxml" />
+<import src="../../common/orderProItem.wxml" />
+
+<view class="orderPay">
+  <template is="stationTitle" data="{{name: stationData.name, open_time: stationData.open_time, close_time: stationData.close_time, desc: '在场消费'}}"></template>
+  <!--  商品列表  -->
+  <view class="orderPay-pro-list">
+    <block wx:for="{{carts}}" wx:key="{{item}}">
+      <template is="orderProItem" data="{{image: item.image_url, name: item.name, count: item.count, price: item.price, red: true}}"></template>
+    </block>
+  </view>
+
+  <!--  卡座号  -->
+  <view class="tableNO">
+    <text class="tableNO-text">卡座号</text>
+    <input class="tableNO-input" type='text' placeholder="请输入您的卡座号" bindinput="tableNOInput"></input>
+  </view>
+
+  <!--  支付方式  -->
+  <view class="payment-type">
+    <image class="payment-type_icon" src="../../images/wechat_pay@3x.png"></image>
+    <text class="payment-type_text">微信支付</text>
+    <image class="payment-type_icon" src="../../images/checked_icon@3x.png"></image>
+  </view>
+
+  <!--  支付bar  -->
+  <view class="pay-bar">
+    <view class="pay-bar_text">总计</view>
+    <view class="pay-bar_amount">￥{{totalPrice}}</view>
+    <view class="pay-bar_btn" bindtap="payOrder">支付订单</view>
+  </view>
+</view>

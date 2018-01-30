@@ -1,0 +1,16 @@
+<template name="consultantItem">
+  <view class="consultant-item">
+    <view class="consultant-item-left">
+    <image class="consultant-item_avatar" src="{{avatar}}" background-size="cover"></image>
+      <view class="consultant-item_name-con">
+        <view class="consultant-item_name">{{name}}</view>
+      </view>
+      <view class="consultant-item_age {{gender}}">{{age}}</view>
+    </view>
+
+    <view class="consultant-item-right">
+      <view wx:if="{{select}}" class="consultant-item_btn" data-id="{{id}}" data-name="{{name}}" bindtap="selectAdviser">选择</view>
+    </view>
+
+  </view>
+</template>

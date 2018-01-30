@@ -1,0 +1,3 @@
+<view wx:if="{{cities.length}}">
+  <ns-index-list bindtapevent="itemTap" cities="{{cities}}"></ns-index-list>
+</view>

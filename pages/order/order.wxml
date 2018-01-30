@@ -1,0 +1,40 @@
+<!--pages/order/order.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/orderItem.wxml" />
+<import src="../../common/noData.wxml" />
+
+<view class="swiper-tab">
+  <view class="tab-item {{currentTab == 'ALL' ? 'active' : ''}}" data-current="ALL" bindtap="swichNav">
+    全部订单
+    <view class="{{currentTab == 'ALL' ? 'on' : ''}}"></view>
+  </view>
+  <view class="tab-item {{currentTab == 'PENDING' ? 'active' : ''}}" data-current="PENDING" bindtap="swichNav">
+    未付款
+    <view class="{{currentTab == 'PENDING' ? 'on' : ''}}"></view>
+  </view>
+  <view class="tab-item {{currentTab == 'SUCCESS' ? 'active' : ''}}" data-current="SUCCESS" bindtap="swichNav">
+    已付款
+    <view class="{{currentTab == 'SUCCESS' ? 'on' : ''}}"></view>
+  </view>
+</view>
+
+<view class="order-wrap">
+  <view class="order-con">
+    <block wx:if="{{orders.length}}">
+      <block wx:for="{{orders}}" wx:key="item">
+        <template is="orderItem" bindTap="orderTap" data="{{id: item.id, station: item.station, status: item.status, no: item.no, price: item.amount_price, comment: item.comment}}"></template>
+      </block>
+    </block>
+    <block wx:else>
+      <template is="noData" data="{{text: '暂无订单'}}" />
+    </block>
+  </view>
+  <!-- 加载更多 -->
+   <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载更多数据</view>
+  </view>
+  <view wx:if="{{loadedAll}}" class="weui-loadmore weui-loadmore_line">
+    <view class="weui-loadmore__tips">全部数据加载完毕</view>
+  </view> 
+</view>

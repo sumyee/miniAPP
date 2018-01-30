@@ -1,0 +1,32 @@
+<!--pages/search/search.wxml-->
+<!-- 导入列表组件 -->
+<import src="../../common/listItem.wxml" />
+<import src="../../common/noData.wxml" />
+
+<view class="search-con">
+  <icon class="search-icon" type="search" size="14"></icon>
+  <view class="search-input-con">
+    <input value="{{searchKey}}" class="search-input" confirm-type="search" placeholder="请输入夜店名称" focus="{{focus}}" bindinput="searchInput" bindconfirm="confirmSearch"></input>
+  </view>
+
+  <navigator hover-class="none" open-type="navigateBack">
+    <view class="search-btn">
+      <view class="search-btn-text">取消</view>
+    </view>
+  </navigator>
+</view>
+
+
+<!--  搜索历史  -->
+<view>
+  <view wx:if="{{searchDatas.length}}" class="operating-title">
+    <view class="operating-title_text">历史记录</view>
+    <view class="operating-title_icon" bindtap="clearAll">全部清除</view>
+  </view>
+  <view class="search-history-con">
+    <view wx:for="{{searchDatas}}" wx:key="i" class="search-history-item">
+      <text class="search-history-item_text" data-data="{{item}}" bindtap="historyTap">{{item}}</text>
+      <text class="search-history-item_del" data-data="{{item}}" bindtap="deleteOne">删除</text>
+    </view>
+  </view>
+</view>

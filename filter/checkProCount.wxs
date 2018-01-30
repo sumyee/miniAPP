@@ -1,0 +1,20 @@
+
+var checkProCount = {
+
+  getCount: function (carts, data) {
+    var count = 0
+    if (!carts.length) {
+      return '0'
+    }
+    for(var i = 0; i < carts.length; i++) {
+      if(data.id === carts[i].id) {
+        count = carts[i].count
+      }
+    }
+    return count
+  }
+}
+
+module.exports = {
+  getCount: checkProCount.getCount
+}

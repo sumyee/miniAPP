@@ -1,0 +1,34 @@
+/**index.wxss**/
+page {
+  background: #fff;
+}
+
+.userinfo {
+  display: flex;
+  width: 100%;
+  padding: 50rpx;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to bottom, #fcb903 0%, #fc9d03 100%);
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #fff;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.ns_popup-con {
+  width: 100%;
+  height: 50vh;
+  background: #fff;
+}

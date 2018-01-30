@@ -1,0 +1,19 @@
+<wxs module="dateFormat" src="../filter/dateFormat.wxs"></wxs>
+
+<template name="commentItem">
+  <view class="comment-item">
+    <!-- <view class="comment-avatar" style="background-image:url('https://wx.qlogo.cn/mmopen/vi_32/oYqLY20YRO7B79MrGK6VQTp88kX4gr4Q8V5ZnAEEEBPRVUPh9JLTdic471NJ0TLLNxdkjyfbooc7P43pK2nzmwQ/0')"></view> -->
+    <view class="comment-avatar" style="background-image:url({{data.user.avatar}})"></view>
+    <view class="comment-info">
+      <view class="comment-name-con">
+        <view class="comment-name">{{data.user.nick_name}}</view>
+        <view class="comment-time">{{dateFormat.getDate(data.created_at)}}</view>
+      </view>
+      <view class="comment-desc">{{data.text}}
+</view>
+      <view class="comment-images">
+        <view wx:if="{{data.media_list.length}}" wx:for="{{data.media_list}}" wx:key="item" class="comment-images-item" style="background-image:url({{item.url}})" data-urls="{{data.media_list}}" data-current="{{item.url}}" bindtap="previewImage"></view>
+      </view>
+    </view>
+  </view>
+</template>

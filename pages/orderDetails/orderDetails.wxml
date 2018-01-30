@@ -1,0 +1,66 @@
+<!--pages/orderDetails/orderDetails.wxml-->
+<!-- 导入组件 -->
+<import src="../../common/orderProItem.wxml" />
+<wxs module="timeFormat" src="../../filter/timeFormat.wxs"></wxs>
+
+<view class="orderDetails">
+  <view class="orderDetails-con">
+    <view class="orderDetails-title">
+      <view class="orderDetails-title_con">
+        <view class="orderDetails-title_name">
+          <view class="orderDetails-title_name_main">{{oederDetails.station.name}}</view>
+          <view class="orderDetails-title_name_sub">{{oederDetails.station.address}}</view>
+        </view>
+        <image mode="aspectFill" class="orderDetails-title_logo" src="{{oederDetails.station.logo_url}}"></image>
+      </view>
+    </view>
+    <!--  -->
+    <view class="orderDetails-info">
+      <!--  -->
+      <view class="orderDetails-info-con">
+        <view class="orderDetails-info_book-con">
+          <view class="orderDetails-info_book-con_orderNo">
+            <view class="orderDetails-info_main">订单号</view>
+            <view class="orderDetails-info_sub">{{oederDetails.no}}</view>
+          </view>
+          <view class="orderDetails-info_book-con_deskNo">
+            <view class="orderDetails-info_main">订台号</view>
+            <view class="orderDetails-info_sub">{{oederDetails.table_no ? oederDetails.table_no : '-'}}</view>
+          </view>
+          <view class="orderDetails-info_book-con_menNo">
+            <view class="orderDetails-info_main">预约人数</view>
+            <view class="orderDetails-info_sub">{{oederDetails.reserve.people_number ? oederDetails.reserve.people_number : '-'}}</view>
+          </view>
+        </view>
+        <view class="orderDetails-info_time-con">
+          <view class="orderDetails-info_time-con_book">
+            <view class="orderDetails-info_main">预约时间</view>
+            <view class="orderDetails-info_sub">{{oederDetails.reserve.reserve_time ? timeFormat.getTime(oederDetails.reserve.reserve_time) : '-'}}</view>
+          </view>
+          <view class="orderDetails-info_time-con_order">
+            <view class="orderDetails-info_main">下单时间</view>
+            <view class="orderDetails-info_sub">{{timeFormat.getTime(oederDetails.created_at)}}</view>
+          </view>
+        </view>
+      </view>
+      <!--  -->
+      <view class="orderDetails-details">
+        <view class="orderDetails-details_title">费用详情</view>
+        <block wx:for="{{oederDetails.items}}" wx:key="{{item}}">
+          <template is="orderProItem" data="{{image: item.image_url, name: item.name, count: item.count, price: item.price}}"></template>
+        </block>
+        <view>
+        </view>
+      </view>
+    </view>
+    <!--  -->
+    <view class="orderDetails-amount">
+      <view class="orderDetails-amount_title">实付金额</view>
+      <view class="orderDetails-amount_price">￥{{oederDetails.amount_price}}</view>
+    </view>
+  </view>
+  <!--   -->
+  <!--  -->
+  <view wx:if="{{oederDetails.status === 'PENDING'}}" class="pay-btn" data-id="{{oederDetails.id}}" bindtap="gotoPay">马上付款</view>
+  <view wx:elif="{{oederDetails.status === 'SUCCESS' && !oederDetails.has_comment}}" class="pay-btn" data-id="{{oederDetails.id}}" bindtap="orderCommentTap">去评论</view>
+</view>
